@@ -13,11 +13,11 @@ public class PeliculaRMI extends UnicastRemoteObject implements PeliculaInterfac
 	private int id=5;
 	public PeliculaRMI() throws RemoteException {
 		peliculas = new ArrayList<Pelicula>();
-		peliculas.add(new Pelicula(1, "Martin Scorsese", "Taxi Driver", 20.52));
-		peliculas.add(new Pelicula(2, "Billy Wilder", "El Apartamento", 15.16));
-		peliculas.add(new Pelicula(3, "Steven Spielberg", "La lista de Schindler", 14.99));
-		peliculas.add(new Pelicula(4, "Ingmar Bergman", "El s�ptimo sello", 9.99));
-		peliculas.add(new Pelicula(5, "Federico Fellini", "La dolce vita", 22.99));
+		peliculas.add(new Pelicula(1, "Taxi Driver", "Martin Scorsese", 20.52));
+		peliculas.add(new Pelicula(2, "El Apartamento", "Billy Wilder", 15.16));
+		peliculas.add(new Pelicula(3, "La lista de Schindler", "Steven Spielberg", 14.99));
+		peliculas.add(new Pelicula(4, "El séptimo sello", "Ingmar Bergman", 9.99));
+		peliculas.add(new Pelicula(5, "La dolce vita", "Federico Fellini", 22.99));
 	}
 	
 	/**

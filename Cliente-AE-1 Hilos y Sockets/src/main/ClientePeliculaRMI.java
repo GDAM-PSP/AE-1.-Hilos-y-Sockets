@@ -10,6 +10,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 import beans.Pelicula;
 import interfaces.PeliculaInterfaceRMI;
@@ -48,6 +49,7 @@ public class ClientePeliculaRMI {
 							System.out.println(titulo);
 						else
 							System.out.println("No se ha encontrado la película indicada.");
+						TimeUnit.SECONDS.sleep(2);
 						break;
 					case "T":
 						System.out.println("Escribe título canción: ");
@@ -58,20 +60,25 @@ public class ClientePeliculaRMI {
 							System.out.println(titulo);
 						else
 							System.out.println("No se ha encontrado la película indicada.");
+						TimeUnit.SECONDS.sleep(2);
 						break;
 					case "D":
 						System.out.println("Escribe el nombre del director: ");
 						texto_usuario = lector.nextLine();
 						System.out.println(peliculas.consultarPeliculasPorDirector(texto_usuario));//SIGUE SIENDO EL OBJETO STUB
+						TimeUnit.SECONDS.sleep(2);
 						break;
 					case "A":
-						System.out.println("Introduce los datos de la película a añadir: ");
+						System.out.println("Introduce el título: ");
 						titulo = lector.nextLine();
+						System.out.println("Introduce el director: ");
 						String director = lector.nextLine();
+						System.out.println("Introduce el precio: ");
 						Double precio = Double.parseDouble(lector.nextLine());
-						Integer id = Integer.parseInt(lector.nextLine());
-						Pelicula pelicula = new Pelicula(id, titulo, director, precio);
+						Pelicula pelicula = new Pelicula(0, titulo, director, precio);
 						System.out.println(peliculas.AnadirPelicula(pelicula));
+						System.out.println("Se ha creado la película.");
+						TimeUnit.SECONDS.sleep(2);
 						break;
 					case "F":
 						System.out.println("Programa finalizado");
@@ -90,6 +97,8 @@ public class ClientePeliculaRMI {
 			cliente.close();
 		} catch (RemoteException | NotBoundException e) {
 			System.out.println(e.getMessage());
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
 		} catch (IOException e1) {
 			e1.printStackTrace();
