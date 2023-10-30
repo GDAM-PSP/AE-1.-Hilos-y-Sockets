@@ -16,7 +16,9 @@ public class Servidor {
 		System.out.println("----------------------------------");
 		try {
 			Registry registro = LocateRegistry.createRegistry(5000);
+			//Objeto a compartir con cliente
 			PeliculaRMI pelicula = new PeliculaRMI();
+			//Objeto STUB para devolver al cliente
 			registro.bind("misPeliculas", pelicula);
 			
 			ServerSocket servidor = new ServerSocket();
@@ -25,15 +27,16 @@ public class Servidor {
 			servidor.bind(direccion);
 			System.out.println("Servidor listo para aceptar solicitudes");
 			System.out.println("Dirección IP: " + direccion.getAddress());
+			//Creamos hilos por cada conexion con clientes diferentes, 
 			while (true) {
-			Socket enchufeAlCliente = servidor.accept();
-			System.out.println("Comunicaci�n entrante");
-			new HiloEscuchador(enchufeAlCliente);
-		}
+				Socket enchufeAlCliente = servidor.accept();
+				System.out.println("Comunicación entrante");
+				new HiloEscuchador(enchufeAlCliente);
+			}
+		//Excepciones necesarias para la funciones usadas
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		} catch (AlreadyBoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

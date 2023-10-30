@@ -14,6 +14,7 @@ public class HiloEscuchador implements Runnable{
 	private Socket enchufeAlCliente;
 	
 	public HiloEscuchador(Socket socket) {
+		//Creamos el nuevo hilo y lo ejecutamos
 		numCliente++;
 		hilo = new Thread(this,"Cliente: "+numCliente);
 		this.enchufeAlCliente = socket;
@@ -25,22 +26,24 @@ public class HiloEscuchador implements Runnable{
 		System.out.println("Estableciendo conexiÃ³n con "+hilo.getName());
 		
 		try {
+			//Obtenemos los stream de entrada y salida
 			InputStream entrada = enchufeAlCliente.getInputStream();
 			OutputStream salida = enchufeAlCliente.getOutputStream();
 			String texto = "";
+			//Cerramos el hilo y conexion cuando el cliente decide salir
 			while (!texto.trim().equals("F")) {
 					byte[] mensaje = new byte[100];
 					entrada.read(mensaje);
 					texto = new String(mensaje);
 					if (texto.trim().equals("F")) {
-						salida.write("Hasta pronto, gracias por establecer conexión".getBytes());
-						System.out.println(hilo.getName()+" ha cerrado la comunicación");
+						salida.write("Hasta pronto, gracias por establecer conexiï¿½n".getBytes());
+						System.out.println(hilo.getName()+" ha cerrado la comunicaciï¿½n");
 					}
 			}
 			entrada.close();
 			salida.close();
 
-	enchufeAlCliente.close();
+			enchufeAlCliente.close();
 			
 		} catch (IOException e) {
 			System.err.println("HiloEscuchador: Error de entrada/salida");
