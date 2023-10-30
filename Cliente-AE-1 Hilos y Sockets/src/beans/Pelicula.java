@@ -1,27 +1,26 @@
-package clases;
+package beans;
 
 import java.io.Serializable;
 
 public class Pelicula implements Serializable{
+	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -1086964331525901787L;
+	private static final long serialVersionUID = 1086964331525901787L;
+	
 	private int id;
 	private String titulo;
 	private String director;
 	private double precio;
-	
-	public Pelicula() {
 		
-	}
-	
-	public Pelicula(int id, String titulo, String director, double precio) {
-		this.id = id;
+	public Pelicula(int id,String titulo, String director, double precio) {
 		this.titulo = titulo;
 		this.director = director;
 		this.precio = precio;
+		this.id = id;
 	}
+	
 	public int getId() {
 		return id;
 	}
@@ -51,6 +50,5 @@ public class Pelicula implements Serializable{
 	public String toString() {
 		return "Pelicula [id=" + id + ", titulo=" + titulo + ", director=" + director + ", precio=" + precio + "]";
 	}
-	
-	
+
 }
