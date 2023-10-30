@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class Pelicula implements Serializable{
 	
 	/**
-	 * 
+	 * Serializacion class
 	 */
 	private static final long serialVersionUID = 1L;
 	
