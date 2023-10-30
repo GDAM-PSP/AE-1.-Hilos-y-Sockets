@@ -2,7 +2,9 @@ package clases;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.PrintStream;
 import java.net.Socket;
 
@@ -21,35 +23,24 @@ public class HiloEscuchador implements Runnable{
 	@Override
 	public void run() {
 		System.out.println("Estableciendo conexiÃ³n con "+hilo.getName());
-		PrintStream salida = null;
-		InputStreamReader entrada = null;
-		BufferedReader entradaBuffer = null;
-		
 		
 		try {
-			//Salida del servidor al cliente
-			salida = new PrintStream(enchufeAlCliente.getOutputStream());
-			//Entrada del servidor al cliente
-			entrada = new InputStreamReader(enchufeAlCliente.getInputStream());
-			entradaBuffer = new BufferedReader(entrada);
-			
+			InputStream entrada = enchufeAlCliente.getInputStream();
+			OutputStream salida = enchufeAlCliente.getOutputStream();
 			String texto = "";
-			boolean continuar = true;
-			
-			//Recorremos el bucle hasta que el cliente decida salir de la aplicaciÃ³n
-			while(continuar) {
-				texto = entradaBuffer.readLine();
-				
-			//Si el cliente escribe "salir" dejamos de recorrer el bucle
-				if (texto.trim().equalsIgnoreCase("Salir")){
-					salida.println("Saliendo...");
-					System.out.println(hilo.getName() + " ha cerrado la comunicacion");
-					continuar = false;
-				}
-					
+			while (!texto.trim().equals("F")) {
+					byte[] mensaje = new byte[100];
+					entrada.read(mensaje);
+					texto = new String(mensaje);
+					if (texto.trim().equals("F")) {
+						salida.write("Hasta pronto, gracias por establecer conexión".getBytes());
+						System.out.println(hilo.getName()+" ha cerrado la comunicación");
+					}
 			}
-			//Cerramos el socket
-			enchufeAlCliente.close();
+			entrada.close();
+			salida.close();
+
+	enchufeAlCliente.close();
 			
 		} catch (IOException e) {
 			System.err.println("HiloEscuchador: Error de entrada/salida");

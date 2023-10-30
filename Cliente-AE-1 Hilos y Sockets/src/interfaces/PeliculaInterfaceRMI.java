@@ -3,7 +3,7 @@ package interfaces;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
-import beans.Pelicula;
+import clases.Pelicula;
 
 public interface PeliculaInterfaceRMI extends Remote{
 	public String consultarID(int id) throws RemoteException;

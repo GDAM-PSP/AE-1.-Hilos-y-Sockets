@@ -27,7 +27,7 @@ public class Servidor {
 			System.out.println("Dirección IP: " + direccion.getAddress());
 			while (true) {
 			Socket enchufeAlCliente = servidor.accept();
-			System.out.println("Comunicación entrante");
+			System.out.println("Comunicaci�n entrante");
 			new HiloEscuchador(enchufeAlCliente);
 		}
 		} catch (IOException e) {

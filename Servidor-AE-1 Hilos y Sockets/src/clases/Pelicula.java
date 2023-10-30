@@ -6,7 +6,7 @@ public class Pelicula implements Serializable{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -1086964331525901787L;
+	private static final long serialVersionUID = 1L;
 	private int id;
 	private String titulo;
 	private String director;

@@ -12,7 +12,7 @@ import java.rmi.registry.Registry;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
-import beans.Pelicula;
+import clases.Pelicula;
 import interfaces.PeliculaInterfaceRMI;
 
 public class ClientePeliculaRMI {
@@ -22,11 +22,11 @@ public class ClientePeliculaRMI {
 		try (Socket cliente = new Socket()) {
 		InetSocketAddress direccionServidor = new InetSocketAddress("127.0.0.1",5020);
 		cliente.connect(direccionServidor);
-		System.out.println("Comunicación establecida con el servidor");
+		System.out.println("Comunicaci�n establecida con el servidor");
 		InputStream entrada = cliente.getInputStream();
 		OutputStream salida = cliente.getOutputStream();
 		try {	
-			System.out.println("Esperando a que el servidor acepte la conexión");
+			System.out.println("Esperando a que el servidor acepte la conexi�n");
 			registry = LocateRegistry.getRegistry("127.0.0.1", 5000);
 			System.out.println("Hemos obtenido el registro");
 			PeliculaInterfaceRMI peliculas = (PeliculaInterfaceRMI) registry.lookup("misPeliculas");
@@ -39,27 +39,28 @@ public class ClientePeliculaRMI {
 			do {
 				escribirMenu(); 
 				opcion = lector.nextLine().toUpperCase();
+				salida.write(opcion.getBytes());
 				switch (opcion) {
 					case "I":
-						System.out.println("Escribe el id (numérico) de la canción: ");
+						System.out.println("Escribe el id (num�rico) de la canci�n: ");
 						texto_usuario = lector.nextLine();
 						String titulo = peliculas.consultarID(Integer.parseInt(texto_usuario));
 						
 						if(!titulo.isEmpty())
 							System.out.println(titulo);
 						else
-							System.out.println("No se ha encontrado la película indicada.");
+							System.out.println("No se ha encontrado la pel�cula indicada.");
 						TimeUnit.SECONDS.sleep(2);
 						break;
 					case "T":
-						System.out.println("Escribe título canción: ");
+						System.out.println("Escribe t�tulo canci�n: ");
 						texto_usuario = lector.nextLine();
 						titulo = peliculas.consultarTitulo(texto_usuario);
 						
 						if(!titulo.isEmpty())
 							System.out.println(titulo);
 						else
-							System.out.println("No se ha encontrado la película indicada.");
+							System.out.println("No se ha encontrado la pel�cula indicada.");
 						TimeUnit.SECONDS.sleep(2);
 						break;
 					case "D":
@@ -69,7 +70,7 @@ public class ClientePeliculaRMI {
 						TimeUnit.SECONDS.sleep(2);
 						break;
 					case "A":
-						System.out.println("Introduce el título: ");
+						System.out.println("Introduce el t�tulo: ");
 						titulo = lector.nextLine();
 						System.out.println("Introduce el director: ");
 						String director = lector.nextLine();
@@ -77,21 +78,21 @@ public class ClientePeliculaRMI {
 						Double precio = Double.parseDouble(lector.nextLine());
 						Pelicula pelicula = new Pelicula(0, titulo, director, precio);
 						System.out.println(peliculas.AnadirPelicula(pelicula));
-						System.out.println("Se ha creado la película.");
+						System.out.println("Se ha creado la pel�cula.");
 						TimeUnit.SECONDS.sleep(2);
 						break;
 					case "F":
 						System.out.println("Programa finalizado");
 						break;
 					default:
-						System.out.println("Opción incorrecta");
+						System.out.println("Opci�n incorrecta");
 				}
 			}while (!opcion.equals("F"));
 			salida.write("salir".getBytes());
 			byte[] mensaje = new byte[100];
 			entrada.read(mensaje);
 			String texto = new String(mensaje);
-			System.out.println(texto);
+			System.out.println(texto.trim());
 			entrada.close();
 			salida.close();
 			cliente.close();
@@ -111,12 +112,12 @@ public class ClientePeliculaRMI {
 		System.out.println("--------------------------");
 		System.out.println("Búsqueda de peliculas");
 		System.out.println("--------------------------");
-		System.out.println("I - Consultar película por ID");
-		System.out.println("T - Consultar película por título");
-		System.out.println("D - Consultar películas por director");
-		System.out.println("A - Añadir película");
-		System.out.println("F - Salir de la aplicación");
+		System.out.println("I - Consultar pel�cula por ID");
+		System.out.println("T - Consultar pel�cula por t�tulo");
+		System.out.println("D - Consultar pel�culas por director");
+		System.out.println("A - Añadir pel�cula");
+		System.out.println("F - Salir de la aplicaci�n");
 		System.out.println("--------------------------");
-		System.out.println("Elija opción:");
+		System.out.println("Elija opci�n:");
 		}
 }
