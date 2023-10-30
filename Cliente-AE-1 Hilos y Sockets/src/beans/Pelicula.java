@@ -2,14 +2,12 @@ package beans;
 
 import java.io.Serializable;
 
-//Seriazable permite pasar un objeto a un flujo de bytes para que pueda ser
-//sacado de la jvm a otro entorno (por ejemplo, otra jmv, un fichero, etc)
 public class Pelicula implements Serializable{
 	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 7704932698362948241L;
+	private static final long serialVersionUID = 1086964331525901787L;
 	
 	private int id;
 	private String titulo;

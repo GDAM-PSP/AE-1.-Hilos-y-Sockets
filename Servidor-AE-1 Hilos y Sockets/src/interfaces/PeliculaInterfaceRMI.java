@@ -5,7 +5,7 @@ import java.rmi.RemoteException;
 
 import clases.Pelicula;
 
-public interface consultas extends Remote{
+public interface PeliculaInterfaceRMI extends Remote{
 	public String consultarID(int id) throws RemoteException;
 	public String consultarTitulo(String titulo) throws RemoteException;
 	public String consultarPeliculasPorDirector(String director) throws RemoteException;

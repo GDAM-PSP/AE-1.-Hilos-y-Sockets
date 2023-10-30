@@ -1,21 +1,22 @@
-package clases;
+package negocio;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
-import interfaces.consultas;
+import clases.Pelicula;
+import interfaces.PeliculaInterfaceRMI;
 
-public class peliculasRMI extends UnicastRemoteObject implements consultas {
+public class PeliculaRMI extends UnicastRemoteObject implements PeliculaInterfaceRMI {
 	
 	private ArrayList<Pelicula> peliculas;
 	private int id=5;
-	public peliculasRMI() throws RemoteException {
+	public PeliculaRMI() throws RemoteException {
 		peliculas = new ArrayList<Pelicula>();
 		peliculas.add(new Pelicula(1, "Martin Scorsese", "Taxi Driver", 20.52));
 		peliculas.add(new Pelicula(2, "Billy Wilder", "El Apartamento", 15.16));
 		peliculas.add(new Pelicula(3, "Steven Spielberg", "La lista de Schindler", 14.99));
-		peliculas.add(new Pelicula(4, "Ingmar Bergman", "El séptimo sello", 9.99));
+		peliculas.add(new Pelicula(4, "Ingmar Bergman", "El sï¿½ptimo sello", 9.99));
 		peliculas.add(new Pelicula(5, "Federico Fellini", "La dolce vita", 22.99));
 	}
 	
@@ -63,7 +64,7 @@ public class peliculasRMI extends UnicastRemoteObject implements consultas {
 		String resultado = "";
 		pelicula.setId(id);
 		peliculas.add(pelicula);
-		resultado = resultado + "La pelicula se le a asignado el id "+this.id+" y a sido añadida como "+pelicula;
+		resultado = resultado + "La pelicula se le a asignado el id "+this.id+" y a sido aï¿½adida como "+pelicula;
 		return resultado;
 	}
 	
