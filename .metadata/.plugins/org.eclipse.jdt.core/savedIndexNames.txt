@@ -1,0 +1,3 @@
+INDEX VERSION 1.134+C:\xampp\htdocs\games&doc.com\AE-1.-Hilos-y-Sockets\.metadata\.plugins\org.eclipse.jdt.core
+1865797976.index
+101334569.index
